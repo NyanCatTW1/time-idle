@@ -19,20 +19,29 @@
   <script src="js/display.js"></script>
   <script src="js/main.js"></script>
   <script src="js/reset.js"></script>
-  <script src="js/resetLayer.js"></script>
+  <script src="js/layers/reset/resetLayer.js"></script>
+  <script src="js/layers/reset/resetUpgrade.js"></script>
   <script src="js/tabs.js"></script>
 </head>
 
 <body onload="startGame()">
   <div id="countdownTab">
     <h2 id="countdown">30 seconds</h2>
+    <h3 id="countdownStartContainer">Currently countdown starts at: <span id="countdownStart">30 seconds</span></h3>
   </div>
+
   <div id="resetLayerTab">
-    <h3 id="timePointDisplay">You have <span id="timePointAmount">0</span> time point<span id="timePointAmountS"></span>
+    <h3 id="timePointDisplay">You have <span id="timePointAmount">0</span> Time Point<span id="timePointAmountS"></span>
     </h3>
     <button id="resetBtn" onclick="resetCheck(1)">Reset the timer for <span id="resetGain">a</span> Time Point<span
         id="resetGainS"></span></h2>
   </div>
+
+  <div id="resetUpgradeTab">
+    <br>
+    <button id="RU0" onclick="buyResetUpgrade(0)"></button>
+  </div>
+
   <div id="optionsTab">
     <br>
     <button onclick="saveGame()">Manual Save</button>
@@ -40,12 +49,15 @@
     <button onclick="importSave()">Import Save</button>
     <button onclick="hardReset()">HARD RESET</button>
   </div>
+
   <div id="tabbingTab">
     <br>
     <button id="countdownToggle" onclick="toggleTab('countdown')">Countdown Display: <span id="countdownShown">On</span></button>
     <button id="resetLayerToggle" onclick="toggleTab('resetLayer')">Reset Layer Display: <span id="resetLayerShown">On</span></button>
+    <button id="resetUpgradeToggle" onclick="toggleTab('resetUpgrade')">Reset Upgrade Display: <span id="resetUpgradeShown">On</span></button>
     <button id="optionsToggle" onclick="toggleTab('options')">Options Display: <span id="optionsShown">On</span></button>
   </div>
+
   <br>
   <button id="tabbingToggle" onclick="toggleTab('tabbing')">Displays Display: <span id="tabbingShown">On</span></button>
 </body>

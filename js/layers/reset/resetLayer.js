@@ -3,6 +3,6 @@ function resetGain() {
 }
 
 function awardTimePoints(amount) {
-  player.timePointsEver = player.timePointsEver.plus(amount)
   player.timePoints = player.timePoints.plus(amount)
+  player.timePointsEver = Decimal.max(player.timePointsEver, player.timePoints)
 }

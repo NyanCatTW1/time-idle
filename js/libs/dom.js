@@ -1,7 +1,7 @@
 var ge = document.getElementById.bind(document)
 
-function updateElement(elm, text) {
-  ge(elm).innerText = text
+function updateElement(elm, text, html = false) {
+  ge(elm)[html ? "innerHTML" : "innerText"] = text
 }
 var ue = updateElement
 

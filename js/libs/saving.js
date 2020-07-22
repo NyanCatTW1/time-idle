@@ -10,8 +10,14 @@ const versionTagName = "version"
 const decimalLibraryVarName = "Decimal" // MAKE SURE YOU CHANGE THIS IF YOU ARE USING OTHER DECIMAL LIBRARIES
 const arrayTypes = {
   // For EACH array in your player variable, put a key/value to define its type like I did below
-  hiddenTabs: "string"
+  hiddenTabs: "String",
 }
+
+// Ex: When you have object that looks like {1: new Decimal(2), 2: new Decimal(1)}, it belongs here
+const decimalDicts = [
+  "resetUpgradesBought"
+]
+
 const hardResetConfirmText = [ // You can add more strings if you want multi time confirmation
   "Are you sure about doing this? YOU WILL LOSE EVERYTHING YOU HAVE WITHOUT ANY REWARDS!",
 ];
@@ -35,7 +41,11 @@ function onExportSuccess() {
 }
 
 function onLoad() { // Put your savefile updating codes here
-
+  if (typeof player.version == "undefined") {
+    alert("Due to a balance change, your time points will be decreased down to 11, sorry!")
+    player.timePoints = Decimal.min(11, player.timePoints)
+    player.timePointsEver = player.timePoints
+  }
 }
 // Only change things above to fit your game UNLESS you know what you're doing
 
@@ -91,7 +101,7 @@ function loadGame(save, imported = false) {
       if (value != versionTagName) _.set(save, value, _.get(reference, value))
     })
 
-    let decimalList = [...new Set(saveLists[1].diff(refLists[1]).concat(findOmegaNumVars(saveLists[2])))]
+    let decimalList = [...new Set(saveLists[1].diff(refLists[1]).concat(findOmegaNumVars(saveLists[2])).concat(findDecimalInDict(saveLists[1])))]
     decimalList.forEach(function (value) {
       _.set(save, value, new window[decimalLibraryVarName](_.get(save, value)))
     })
@@ -116,6 +126,19 @@ function loadGame(save, imported = false) {
       return
     }
   }
+}
+
+function findDecimalInDict(stringList) {
+  let ret = []
+  for (let varName of stringList) {
+    for (let decimalDict of decimalDicts) {
+      if (varName.startsWith(decimalDict)) {
+        ret.push(varName)
+        break
+      }
+    }
+  }
+  return ret
 }
 
 function findOmegaNumVars(arrayList) {

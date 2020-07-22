@@ -1,6 +1,7 @@
 var tabList = [
   "countdown",
   "resetLayer",
+  "resetUpgrade",
   "options",
   "tabbing"
 ]
@@ -17,5 +18,11 @@ function toggleTab(tab) {
 }
 
 function showTab(tab) {
-  return !player.hiddenTabs.includes(tab)
+  let unlocked = true
+  switch(tab) {
+    case "resetUpgrade":
+      unlocked = player.timePointsEver.gt(0)
+  }
+
+  return unlocked && !player.hiddenTabs.includes(tab)
 }
