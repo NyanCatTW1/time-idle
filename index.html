@@ -15,6 +15,7 @@
   <script src="js/libs/clipboard.js"></script>
   <script src="js/libs/format.js"></script>
   <script src="js/libs/saving.js"></script>
+  <script src="js/auto.js"></script>
   <script src="js/countdown.js"></script>
   <script src="js/display.js"></script>
   <script src="js/main.js"></script>
@@ -33,13 +34,16 @@
   <div id="resetLayerTab">
     <h3 id="timePointDisplay">You have <span id="timePointAmount">0</span> Time Point<span id="timePointAmountS"></span>
     </h3>
-    <button id="resetBtn" onclick="resetCheck(1)">Reset the timer for <span id="resetGain">a</span> Time Point<span
+    <button id="resetBtn" onclick="resetCheck(1)">Reset the countdown for <span id="resetGain">a</span> Time Point<span
         id="resetGainS"></span></h2>
   </div>
 
   <div id="resetUpgradeTab">
     <br>
     <button id="RU0" onclick="buyResetUpgrade(0)"></button>
+    <button id="RU1" onclick="buyResetUpgrade(1)"></button>
+    <br>
+    <button id="RU2" onclick="buyResetUpgrade(2)"></button>
   </div>
 
   <div id="optionsTab">

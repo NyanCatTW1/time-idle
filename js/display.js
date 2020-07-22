@@ -16,7 +16,7 @@ function updateResetLayer(force = false) {
 
   const gain = resetGain()
   const single = gain.eq(1)
-  de("resetBtn", player.countdown.eq(0) || player.timePointsEver.gt(0), "", function() {
+  de("resetBtn", player.countdown.lte(0), "", function() {
     ue("resetGain", single ? "a" : nf(gain))
     ue("resetGainS", single ? "" : "s")
   })
@@ -44,7 +44,9 @@ function updateRUDisplay(force = false) {
   if (!showTab("resetUpgrade") && !force) return false
 
   for (let id = 0; id < resetUpgrades.length; id++) {
-    ue(`RU${id}`, getRUBtnText(id))
+    de(`RU${id}`, RUUnlocked(id), "", function() {
+      ue(`RU${id}`, getRUBtnText(id))
+    })
   }
 }
 

@@ -7,6 +7,7 @@ var getDefaultPlayer = () => ({
   hiddenTabs: [],
   version: 0
 })
+
 var player = getDefaultPlayer()
 var diff = 0
 var diffMultiplier = 1
@@ -20,7 +21,8 @@ function gameLoop(diff) {
   //if (diffMultiplier > 1) console.log("SHAME")
   //else if (diffMultiplier < 1) console.log("SLOWMOTION")
 
-  player.countdown = Decimal.max(0, Decimal.min(countdownStart(), player.countdown.sub(diff/1000)))
+  player.countdown = Decimal.min(countdownStart(), player.countdown.sub(diff/1000))
+  runAuto()
 
   updateDisplay()
   player.lastUpdate = thisUpdate

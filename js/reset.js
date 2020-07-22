@@ -2,7 +2,7 @@ function resetCheck(layer) {
   let checkPass = false
   switch (layer) {
     case 1:
-      checkPass = player.countdown.eq(0)
+      checkPass = player.countdown.lte(0)
       break;
   }
   if (checkPass) reset(layer)
