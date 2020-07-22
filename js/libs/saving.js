@@ -2,18 +2,21 @@
 // Note: Make sure your saving variable is defined by VAR and not LET, otherwise it won't work
 // You need Lodash for this to work https://lodash.com/
 // And please, just please make sure you change the stuff below to suit your code, otherwise it will burst on fire
-let saveName = "TISave"
-let initPlayerFunctionName = "getDefaultPlayer"
-let playerVarName = "player" // DO NOT USE THE WORD "SAVE"
-let importDangerAlertText = "Your imported save seems to be missing some values, which means importing this save might be destructive, if you have made a backup of your current save and are sure about importing this save please press OK, if not, press cancel and the save will not be imported."
-let versionTagName = "version"
-let decimalLibraryVarName = "Decimal" // MAKE SURE YOU CHANGE THIS IF YOU ARE USING OTHER DECIMAL LIBRARIES
-let arrayTypes = {
+const saveName = "TISave"
+const initPlayerFunctionName = "getDefaultPlayer"
+const playerVarName = "player" // DO NOT USE THE WORD "SAVE"
+const importDangerAlertText = "Your imported save seems to be missing some values, which means importing this save might be destructive, if you have made a backup of your current save and are sure about importing this save please press OK, if not, press cancel and the save will not be imported."
+const versionTagName = "version"
+const decimalLibraryVarName = "Decimal" // MAKE SURE YOU CHANGE THIS IF YOU ARE USING OTHER DECIMAL LIBRARIES
+const arrayTypes = {
   // For EACH array in your player variable, put a key/value to define its type like I did below
+  hiddenTabs: "string"
 }
-let hardResetConfirmText = [ // You can add more strings if you want multi time confirmation
-  "Are you sure about doing this? YOU WILL LOSE EVERYTHING YOU HAVE WITHOUT ANY REWARDS!"
+const hardResetConfirmText = [ // You can add more strings if you want multi time confirmation
+  "Are you sure about doing this? YOU WILL LOSE EVERYTHING YOU HAVE WITHOUT ANY REWARDS!",
 ];
+
+const importPrompt = "Paste your exported save below:"
 
 function onImportError() {
   alert("Error: Imported save is in invalid format, please make sure you've copied the save correctly and isn't just typing gibberish.")
@@ -24,13 +27,28 @@ function onLoadError() {
 }
 
 function onImportSuccess() {
-  alert("Save imported successfully.")
+  console.log("Save imported successfully.")
+}
+
+function onExportSuccess() {
+  alert("Exported to clipboard")
 }
 
 function onLoad() { // Put your savefile updating codes here
 
 }
 // Only change things above to fit your game UNLESS you know what you're doing
+
+function exportSave() {
+  copyStringToClipboard(btoa(JSON.stringify(window[playerVarName])))
+  onExportSuccess()
+}
+
+function importSave() {
+  let save = prompt(importPrompt, "")
+  if (save == "" || save == null) return false
+  loadGame(save, true)
+}
 
 function hardReset() {
   for (let confirmText of hardResetConfirmText) {
