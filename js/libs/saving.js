@@ -45,6 +45,12 @@ function onLoad() { // Put your savefile updating codes here
     alert("Due to a balance change, your time points will be decreased down to 11, sorry!")
     player.timePoints = Decimal.min(11, player.timePoints)
     player.timePointsEver = player.timePoints
+    player.version = 0
+  }
+  if (player.version < 1) {
+    if (getRULevel(2).gt(4)) {
+      player.resetUpgradesBought[2] = new Decimal(4)
+    }
   }
 }
 // Only change things above to fit your game UNLESS you know what you're doing
