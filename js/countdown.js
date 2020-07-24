@@ -4,6 +4,7 @@ function countdownStart() {
   // Apply reset upgrade effect
   ret = ret.minus(getRULevel(0).times(5))
   ret = ret.minus(player.timePoints.times(getRULevel(2).times(2)))
+  ret = ret.minus(getRULevel(3))
 
   // Apply linear softcap
   ret = ret.plus(Decimal.max(0, player.timePoints.minus(10)).times(getLinearSoftcapPower()))
