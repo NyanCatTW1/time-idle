@@ -11,7 +11,7 @@ function updateResetLayer(force = false) {
   ue("countdown", timeDisplay(player.countdown))
 
   de("countdownStartContainer", player.timePointsEver.gt(10) || getRULevel(0).gt(0), "", function() {
-    ue("countdownStart", timeDisplay(countdownStart()))
+    updateCountdownStart()
   })
 
   const gain = resetGain()
@@ -25,6 +25,20 @@ function updateResetLayer(force = false) {
     ue("timePointAmount", nf(player.timePoints))
     ue("timePointAmountS", player.timePoints.gt(1) ? "s" : "")
   })
+}
+
+function updateCountdownStart() {
+  const linearPart = getLinearPart()
+  const expoPart = getExpoPart()
+  let str = ""
+
+  if (expoPart.neq(1)) {
+    str += `${nf(linearPart)} * ${nf(expoPart)} = `
+  }
+  
+  str += timeDisplay(countdownStart())
+
+  ue("countdownStart", str)
 }
 
 function updateToggleDisplay(force = false) {

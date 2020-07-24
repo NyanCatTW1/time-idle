@@ -1,4 +1,11 @@
 function countdownStart() {
+  let ret = getLinearPart()
+  ret = ret.times(getExpoPart())
+
+  return ret
+}
+
+function getLinearPart() {
   let ret = new Decimal(30)
   
   // Apply reset upgrade effect
@@ -11,6 +18,12 @@ function countdownStart() {
 
   // Linear hardcap
   ret = Decimal.max(1, ret)
+
+  return ret
+}
+
+function getExpoPart() {
+  let ret = new Decimal(1)
 
   // Apply expo softcap
   ret = ret.times(Decimal.pow(1.1, Decimal.max(0, player.timePoints.minus(50))))
