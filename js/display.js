@@ -28,12 +28,17 @@ function updateResetLayer(force = false) {
 }
 
 function updateCountdownStart() {
-  const linearPart = getLinearPart()
+  const linearPart = getLinearPart(false)
   const expoPart = getExpoPart()
   let str = ""
 
   if (expoPart.neq(1)) {
-    str += `${nf(linearPart)} * ${nf(expoPart)} = `
+    if (linearPart.lt(1)) {
+      str += `Max(1, ${nf(linearPart)}) * `
+    } else {
+      str += `${nf(linearPart)} * `
+    }
+    str += `${nf(expoPart)} = `
   }
   
   str += timeDisplay(countdownStart())

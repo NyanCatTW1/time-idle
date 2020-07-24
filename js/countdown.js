@@ -5,7 +5,7 @@ function countdownStart() {
   return ret
 }
 
-function getLinearPart() {
+function getLinearPart(hardcap = true) {
   let ret = new Decimal(30)
   
   // Apply reset upgrade effect
@@ -17,7 +17,7 @@ function getLinearPart() {
   ret = ret.plus(Decimal.max(0, player.timePoints.minus(10)).times(getLinearSoftcapPower()))
 
   // Linear hardcap
-  ret = Decimal.max(1, ret)
+  if (hardcap) ret = Decimal.max(1, ret)
 
   return ret
 }
