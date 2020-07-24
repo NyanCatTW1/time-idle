@@ -59,11 +59,23 @@ function updateToggleDisplay(force = false) {
   }
 }
 
+function RUMaxed(id) {
+  return getRULevel(id).gte(resetUpgrades[id][3])
+}
+
+function showRU(id) {
+  let ret = RUUnlocked(id)
+  ret = ret && !(player.hideMaxedResetUpg && RUMaxed(id))
+  return ret
+}
+
 function updateRUDisplay(force = false) {
   if (!showTab("resetUpgrade") && !force) return false
 
+  ue("maxedShown", player.hideMaxedResetUpg ? "Yes" : "No")
+
   for (let id = 0; id < resetUpgrades.length; id++) {
-    de(`RU${id}`, RUUnlocked(id), "", function() {
+    de(`RU${id}`, showRU(id), "", function() {
       ue(`RU${id}`, getRUBtnText(id))
     })
   }
@@ -73,7 +85,7 @@ function getRUBtnText(id) {
   const RU = resetUpgrades[id]
   const RUCost = getRUCost(id)
   return `${RU[0]}
-Cost: ${getRULevel(id).eq(resetUpgrades[id][3]) ? "MAXED" : `${nf(RUCost)} Time Point${RUCost.gt(1) ? "s" : ""}`}
+Cost: ${ RUMaxed(id) ? "MAXED" : `${nf(RUCost)} Time Point${RUCost.gt(1) ? "s" : ""}`}
 Current Level: ${nf(getRULevel(id))}/${nf(resetUpgrades[id][3])}`
 }
 
@@ -81,4 +93,8 @@ function updateTabs() {
   for (let tab of tabList) {
     de(`${tab}Tab`, showTab(tab))
   }
+}
+
+function toggleMaxedResetUpg() {
+  player.hideMaxedResetUpg = !player.hideMaxedResetUpg
 }
