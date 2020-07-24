@@ -5,7 +5,7 @@ var getDefaultPlayer = () => ({
   timePointsEver: new Decimal(0),
   resetUpgradesBought: {},
   hiddenTabs: [],
-  version: 0
+  version: 1
 })
 
 var player = getDefaultPlayer()
