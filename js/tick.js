@@ -10,6 +10,8 @@ function getEffectiveTick() {
 
   ret = ret.minus(getHardwareEffect("MEM"))
   
+  ret = Decimal.max(0, ret)
+
   return ret
 }
 
@@ -22,7 +24,7 @@ function getLinearPart(hardcap = true) {
   
   // Apply tick upgrade effect
   ret = ret.minus(getTULevel(0).times(5))
-  ret = ret.minus(tick.times(getTULevel(2).times(2)))
+  ret = ret.minus(player.tick.times(getTULevel(2).times(2)))
   ret = ret.minus(getTULevel(3).times(5))
 
   // Apply linear softcap
