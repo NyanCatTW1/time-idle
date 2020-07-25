@@ -1,7 +1,7 @@
 var tabList = [
-  "countdown",
-  "resetLayer",
-  "resetUpgrade",
+  "tick",
+  "tickLayer",
+  "tickUpgrade",
   "options",
   "tabbing"
 ]
@@ -20,8 +20,8 @@ function toggleTab(tab) {
 function showTab(tab) {
   let unlocked = true
   switch(tab) {
-    case "resetUpgrade":
-      unlocked = player.timePointsEver.gt(0)
+    case "tickUpgrade":
+      unlocked = player.tickEver.gt(0)
   }
 
   return unlocked && !player.hiddenTabs.includes(tab)

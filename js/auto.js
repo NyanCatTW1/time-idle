@@ -1,7 +1,7 @@
-function getResetCountdown() {
+function getAutoTickSlowdown() {
   return new Decimal(5)
 }
 
 function runAuto() {
-  if (getRULevel(1).gt(0) && player.countdown.times(-1).gte(getResetCountdown())) reset(1)
+  if (getTULevel(1).gt(0) && player.tickTimeSpent.minus(tickReq()).gte(getAutoTickSlowdown())) reset(1)
 }

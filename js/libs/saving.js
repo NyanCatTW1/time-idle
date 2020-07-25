@@ -15,7 +15,7 @@ const arrayTypes = {
 
 // Ex: When you have object that looks like {1: new Decimal(2), 2: new Decimal(1)}, it belongs here
 const decimalDicts = [
-  "resetUpgradesBought"
+  "tickUpgradesBought"
 ]
 
 const hardResetConfirmText = [ // You can add more strings if you want multi time confirmation
@@ -43,14 +43,34 @@ function onExportSuccess() {
 function onLoad() { // Put your savefile updating codes here
   if (typeof player.version == "undefined") {
     alert("Due to a balance change, your time points will be decreased down to 11, sorry!")
-    player.timePoints = Decimal.min(11, player.timePoints)
-    player.timePointsEver = player.timePoints
+    player.tick = Decimal.min(11, player.tick)
+    player.tickEver = player.tick
     player.version = 0
   }
   if (player.version < 1) {
-    if (getRULevel(2).gt(4)) {
-      player.resetUpgradesBought[2] = new Decimal(4)
+    if (getTULevel(2).gt(4)) {
+      player.tickUpgradesBought[2] = new Decimal(4)
     }
+  }
+  if (player.version < 1.2 && player.countdown) {
+    player.tickTimeSpent = player.countdown
+    delete player.countdown
+  }
+  if (player.version < 1.3 && player.resetUpgradesBought) {
+    player.tickUpgradesBought = player.resetUpgradesBought
+    delete player.resetUpgradesBought
+  }
+  if (player.version < 1.4 && player.hideMaxedResetUpg) {
+    player.hideMaxedTickUpg = player.hideMaxedResetUpg
+    delete player.hideMaxedResetUpg
+  }
+  if (player.version < 1.5 && player.timePoints) {
+    player.tick = player.timePoints
+    delete player.timePoints
+  }
+  if (player.version < 1.5 && player.timePointsEver) {
+    player.tickEver = player.timePointsEver
+    delete player.timePointsEver
   }
 }
 // Only change things above to fit your game UNLESS you know what you're doing

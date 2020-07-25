@@ -1,49 +1,49 @@
 function updateDisplay() {
-  updateResetLayer()
+  updateTickLayer()
   updateToggleDisplay()
-  updateRUDisplay()
+  updateTUDisplay()
   updateTabs()
 }
 
-function updateResetLayer(force = false) {
-  if (!showTab("resetLayer") && !force) return false
+function updateTickLayer(force = false) {
+  if (!showTab("tickLayer") && !force) return false
 
-  ue("countdown", timeDisplay(player.countdown))
+  updateTickProgress()
+  updateTickReq()
 
-  de("countdownStartContainer", player.timePointsEver.gt(10) || getRULevel(0).gt(0), "", function() {
-    updateCountdownStart()
-  })
-
-  const gain = resetGain()
+  const gain = tickGain()
   const single = gain.eq(1)
-  de("resetBtn", player.countdown.lte(0), "", function() {
-    ue("resetGain", single ? "a" : nf(gain))
-    ue("resetGainS", single ? "" : "s")
+  de("tickBtn", canTick(), "", function() {
+    ue("tickGain", single ? "a" : nf(gain))
+    ue("tickGainS", single ? "" : "s")
   })
 
-  de("timePointDisplay", player.timePointsEver.gt(0), "", function() {
-    ue("timePointAmount", nf(player.timePoints))
-    ue("timePointAmountS", player.timePoints.gt(1) ? "s" : "")
+  de("tickDisplay", player.tickEver.gt(0), "", function() {
+    ue("currentTick", nf(player.tick))
   })
 }
 
-function updateCountdownStart() {
+function updateTickProgress() {
+  const req = tickReq()
+  ue("tickProgress", getFinalProgressBar(Decimal.min(req, player.tickTimeSpent), req, new Decimal(1)))
+}
+
+function updateTickReq() {
   const linearPart = getLinearPart(false)
-  const expoPart = getExpoPart()
   let str = ""
 
-  if (expoPart.neq(1)) {
+  if (getExpoPart().neq(1)) {
     if (linearPart.lt(1)) {
       str += `Max(1, ${nf(linearPart)}) * `
     } else {
       str += `${nf(linearPart)} * `
     }
-    str += `${nf(expoPart)} = `
+    str += `(${nf(getExpoBase())} ^ ${nf(getExpoPower())}) = `
   }
   
-  str += timeDisplay(countdownStart())
+  str += timeDisplay(tickReq())
 
-  ue("countdownStart", str)
+  ue("nextTickReq", str)
 }
 
 function updateToggleDisplay(force = false) {
@@ -52,41 +52,41 @@ function updateToggleDisplay(force = false) {
     return false
   }
 
-  de("resetLayerToggle", player.timePointsEver.gt(0))
-  de("resetUpgradeToggle", player.timePointsEver.gt(0))
+  de("tickLayerToggle", player.tickEver.gt(0))
+  de("tickUpgradeToggle", player.tickEver.gt(0))
   for (let tab of tabList) {
     ue(`${tab}Shown`, showTab(tab) ? "On" : "Off")
   }
 }
 
-function RUMaxed(id) {
-  return getRULevel(id).gte(resetUpgrades[id][3])
+function TUMaxed(id) {
+  return getTULevel(id).gte(tickUpgrades[id][3])
 }
 
-function showRU(id) {
-  let ret = RUUnlocked(id)
-  ret = ret && !(player.hideMaxedResetUpg && RUMaxed(id))
+function showTU(id) {
+  let ret = TUUnlocked(id)
+  ret = ret && !(player.hideMaxedTickUpg && TUMaxed(id))
   return ret
 }
 
-function updateRUDisplay(force = false) {
-  if (!showTab("resetUpgrade") && !force) return false
+function updateTUDisplay(force = false) {
+  if (!showTab("tickUpgrade") && !force) return false
 
-  ue("maxedShown", player.hideMaxedResetUpg ? "Yes" : "No")
+  ue("maxedShown", player.hideMaxedTickUpg ? "Yes" : "No")
 
-  for (let id = 0; id < resetUpgrades.length; id++) {
-    de(`RU${id}`, showRU(id), "", function() {
-      ue(`RU${id}`, getRUBtnText(id))
+  for (let id = 0; id < tickUpgrades.length; id++) {
+    de(`TU${id}`, showTU(id), "", function() {
+      ue(`TU${id}`, getTUBtnText(id))
     })
   }
 }
 
-function getRUBtnText(id) {
-  const RU = resetUpgrades[id]
-  const RUCost = getRUCost(id)
-  return `${RU[0]}
-Cost: ${ RUMaxed(id) ? "MAXED" : `${nf(RUCost)} Time Point${RUCost.gt(1) ? "s" : ""}`}
-Current Level: ${nf(getRULevel(id))}/${nf(resetUpgrades[id][3])}`
+function getTUBtnText(id) {
+  const TU = tickUpgrades[id]
+  const TUCost = getTUCost(id)
+  return `${TU[0]}
+Req: ${ TUMaxed(id) ? "MAXED" : `Tick ${nf(TUCost)}`}
+Current Level: ${nf(getTULevel(id))}/${nf(tickUpgrades[id][3])}`
 }
 
 function updateTabs() {
@@ -95,6 +95,6 @@ function updateTabs() {
   }
 }
 
-function toggleMaxedResetUpg() {
-  player.hideMaxedResetUpg = !player.hideMaxedResetUpg
+function toggleMaxedTickUpg() {
+  player.hideMaxedTickUpg = !player.hideMaxedTickUpg
 }

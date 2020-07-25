@@ -1,12 +1,12 @@
 var getDefaultPlayer = () => ({
   lastUpdate: new Date().getTime(),
-  countdown: new Decimal(30),
-  timePoints: new Decimal(0),
-  timePointsEver: new Decimal(0),
-  resetUpgradesBought: {},
+  tickTimeSpent: new Decimal(0),
+  tick: new Decimal(0),
+  tickEver: new Decimal(0),
+  tickUpgradesBought: {},
   hiddenTabs: [],
-  hideMaxedResetUpg: true,
-  version: 1.1
+  hideMaxedTickUpg: true,
+  version: 1.5
 })
 
 var player = getDefaultPlayer()
@@ -22,7 +22,7 @@ function gameLoop(diff) {
   //if (diffMultiplier > 1) console.log("SHAME")
   //else if (diffMultiplier < 1) console.log("SLOWMOTION")
 
-  player.countdown = Decimal.min(countdownStart(), player.countdown.sub(diff/1000))
+  player.tickTimeSpent = player.tickTimeSpent.plus(diff/1000)
   runAuto()
 
   updateDisplay()
