@@ -9,18 +9,24 @@
   <meta name="description" content="Time Idle" />
   <meta name="author" content="Kryptid and Nyan Cat" />
 
-  <script src="js/libs/lodash.min.js"></script>
   <script src="js/libs/break_eternity.min.js"></script>
-  <script src="js/libs/dom.js"></script>
+  <script src="js/libs/lodash.min.js"></script>
+
   <script src="js/libs/clipboard.js"></script>
+  <script src="js/libs/dom.js"></script>
   <script src="js/libs/format.js"></script>
   <script src="js/libs/saving.js"></script>
+
+  <script src="js/layers/rebuild/cash.js"></script>
+  <script src="js/layers/rebuild/hardware.js"></script>
+
+  <script src="js/layers/tick/tickLayer.js"></script>
+  <script src="js/layers/tick/tickUpgrade.js"></script>
+
   <script src="js/auto.js"></script>
   <script src="js/display.js"></script>
   <script src="js/main.js"></script>
   <script src="js/reset.js"></script>
-  <script src="js/layers/tick/tickLayer.js"></script>
-  <script src="js/layers/tick/tickUpgrade.js"></script>
   <script src="js/tabs.js"></script>
   <script src="js/tick.js"></script>
 </head>
@@ -49,6 +55,16 @@
     <button onclick="toggleMaxedTickUpg()">Hide Maxed Upgrades: <span id="maxedShown">On</span></button>
   </div>
 
+  <div id="rebuildTab">
+    <br>
+    <div>You have spent <span id="cashSpent">0</span>/<span id="cashAvailable">0</span> cash</div>
+    <div>
+      <label for="CPU">CPU:</label>
+      <select name="CPU" id="CPU"></select>
+    </div>
+    <button onclick="resetCheck(3)">Rebuild your machine in the price of abandoning the previous simulation.<span id="firstRebuild"> You will also unlock a (NOT IMPLEMENTED) new feature!</span></button>
+  </div>
+
   <div id="optionsTab">
     <br>
     <button onclick="saveGame()">Manual Save</button>
@@ -62,6 +78,7 @@
     <button id="tickToggle" onclick="toggleTab('tick')">Tick Display: <span id="tickShown">On</span></button>
     <button id="tickLayerToggle" onclick="toggleTab('tickLayer')">Tick Layer Display: <span id="tickLayerShown">On</span></button>
     <button id="tickUpgradeToggle" onclick="toggleTab('tickUpgrade')">Tick Upgrade Display: <span id="tickUpgradeShown">On</span></button>
+    <button id="rebuildToggle" onclick="toggleTab('rebuild')">Rebuild layer Display: <span id="rebuildShown">On</span></button>
     <button id="optionsToggle" onclick="toggleTab('options')">Options Display: <span id="optionsShown">On</span></button>
   </div>
 

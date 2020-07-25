@@ -2,6 +2,7 @@ function updateDisplay() {
   updateTickLayer()
   updateToggleDisplay()
   updateTUDisplay()
+  updateRebuildLayer()
   updateTabs()
 }
 
@@ -25,7 +26,7 @@ function updateTickLayer(force = false) {
 
 function updateTickProgress() {
   const req = tickReq()
-  ue("tickProgress", getFinalProgressBar(Decimal.min(req, player.tickTimeSpent), req, new Decimal(1)))
+  ue("tickProgress", getFinalProgressBar(Decimal.min(req, player.tickTimeSpent), req, getProcessPower()))
 }
 
 function updateTickReq() {
@@ -52,10 +53,10 @@ function updateToggleDisplay(force = false) {
     return false
   }
 
-  de("tickLayerToggle", player.tickEver.gt(0))
-  de("tickUpgradeToggle", player.tickEver.gt(0))
   for (let tab of tabList) {
-    ue(`${tab}Shown`, showTab(tab) ? "On" : "Off")
+    de(`${tab}Toggle`, tabUnlocked(tab), "", function() {
+      ue(`${tab}Shown`, showTab(tab) ? "On" : "Off")
+    })
   }
 }
 
@@ -97,4 +98,10 @@ function updateTabs() {
 
 function toggleMaxedTickUpg() {
   player.hideMaxedTickUpg = !player.hideMaxedTickUpg
+}
+
+function updateRebuildLayer() {
+  de("firstRebuild", player.rebuilds < 1)
+  ue("cashSpent", nf(getPlanCost()))
+  ue("cashAvailable", nf(getCashAvailable()))
 }

@@ -46,6 +46,12 @@ function getExpoPower() {
 function getLinearSoftcapPower() {
   let ret = new Decimal(10)
   ret = ret.minus(getTULevel(1))
-  ret = ret.times(Decimal.max(0, player.tick.minus(99)).plus(1))
+  ret = ret.times(Decimal.max(0, player.tick.minus(99)).divide(20).plus(1))
+  return ret
+}
+
+function getProcessPower() {
+  let ret = getHardwareEffect("CPU")
+  
   return ret
 }

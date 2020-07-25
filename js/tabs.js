@@ -2,6 +2,7 @@ var tabList = [
   "tick",
   "tickLayer",
   "tickUpgrade",
+  "rebuild",
   "options",
   "tabbing"
 ]
@@ -17,12 +18,19 @@ function toggleTab(tab) {
   if (!wasHidden) player.hiddenTabs.push(tab)
 }
 
-function showTab(tab) {
-  let unlocked = true
+function tabUnlocked(tab) {
   switch(tab) {
+    case "tickLayer":
+      return player.tickEver.gt(0) || canTick()
     case "tickUpgrade":
-      unlocked = player.tickEver.gt(0)
+      return player.tickEver.gt(0)
+    case "rebuild":
+      return player.tickEver.gte(100)
+    default:
+      return true
   }
+}
 
-  return unlocked && !player.hiddenTabs.includes(tab)
+function showTab(tab) {
+  return tabUnlocked(tab) && !player.hiddenTabs.includes(tab)
 }

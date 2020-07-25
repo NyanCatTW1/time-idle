@@ -15,7 +15,7 @@ const arrayTypes = {
 
 // Ex: When you have object that looks like {1: new Decimal(2), 2: new Decimal(1)}, it belongs here
 const decimalDicts = [
-  "tickUpgradesBought"
+  "tickUpgradesBought",
 ]
 
 const hardResetConfirmText = [ // You can add more strings if you want multi time confirmation

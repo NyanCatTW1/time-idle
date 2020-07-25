@@ -6,6 +6,8 @@ var getDefaultPlayer = () => ({
   tickUpgradesBought: {},
   hiddenTabs: [],
   hideMaxedTickUpg: true,
+  hardware: {},
+  rebuilds: 0,
   version: 1.5
 })
 
@@ -22,7 +24,7 @@ function gameLoop(diff) {
   //if (diffMultiplier > 1) console.log("SHAME")
   //else if (diffMultiplier < 1) console.log("SLOWMOTION")
 
-  player.tickTimeSpent = player.tickTimeSpent.plus(diff/1000)
+  player.tickTimeSpent = player.tickTimeSpent.plus(getProcessPower().times(diff/1000))
   runAuto()
 
   updateDisplay()
@@ -30,9 +32,9 @@ function gameLoop(diff) {
 }
 
 function startGame() {
-  // Some init job
   startInterval()
   loadGame()
+  updateHardwareSelect()
   setInterval(saveGame, 3000)
 }
 
