@@ -7,6 +7,8 @@ var getDefaultPlayer = () => ({
   hiddenTabs: [],
   hideMaxedTickUpg: true,
   hardware: {},
+  problemTickEver: [null],
+  challenge: 0,
   rebuilds: 0,
   version: 1.5
 })

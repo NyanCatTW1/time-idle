@@ -3,6 +3,10 @@ var hardwares = {
     // Name, Cost, Power
     ["Default", new Decimal(0), new Decimal(1)],
     ["T1", new Decimal(100), new Decimal(2)]
+  ],
+  MEM: [
+    ["Default", new Decimal(0), new Decimal(0)],
+    ["T1", new Decimal(200), new Decimal(5)]
   ]
 }
 
@@ -57,6 +61,8 @@ function getHardwareEffect(type) {
 function getHardwareEffectText(type, value) {
   switch (type) {
     case "CPU":
-      return `${nf(value)}x processing speed`
+      return `${nf(value)} cycle/s`
+    case "MEM":
+      return `Delay all softcaps by ${nf(value)} ticks`
   }
 }

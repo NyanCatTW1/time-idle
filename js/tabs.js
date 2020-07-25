@@ -1,8 +1,9 @@
 var tabList = [
+  "tickProgress",
   "tick",
-  "tickLayer",
   "tickUpgrade",
   "rebuild",
+  "problems",
   "options",
   "tabbing"
 ]
@@ -26,6 +27,8 @@ function tabUnlocked(tab) {
       return player.tickEver.gt(0)
     case "rebuild":
       return player.tickEver.gte(100)
+    case "problems":
+      return player.rebuilds > 0
     default:
       return true
   }

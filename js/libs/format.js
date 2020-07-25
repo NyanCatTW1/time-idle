@@ -69,4 +69,4 @@ function getProgressBar(percent) {
 
 var getETA = (current, target, growSpeed) => `ETA: ${timeDisplay(target.sub(current).div(growSpeed).toNumber())}`
 
-var getFinalProgressBar = (current, target, growSpeed) => [getProgressBar(current.div(target).times(100).toNumber()), getETA(current, target, growSpeed), `${nf(current)}/${nf(target)}`].join(" | ")
+var getFinalProgressBar = (current, target, growSpeed) => [getProgressBar(current.div(target).times(100).toNumber()), getETA(current, target, growSpeed), `${formatValue(current, 2, 1)}/${formatValue(target, 2, 1)}`].join(" | ")

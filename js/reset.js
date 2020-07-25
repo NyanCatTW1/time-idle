@@ -10,7 +10,15 @@ function resetCheck(layer) {
   if (checkPass) reset(layer)
 }
 
-function reset(layer) {
+function reset(layer, auto = false) {
+  // Confirmations
+  if (!auto) {
+    switch (layer) {
+      case 3:
+        if (!confirm("This will reset all your tick upgrades and put you back to tick 0, are you sure about that?")) return false
+    }
+  }
+
   // Layer specfic codes
   switch (layer) {
     case 1:

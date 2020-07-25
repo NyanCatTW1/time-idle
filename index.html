@@ -19,8 +19,9 @@
 
   <script src="js/layers/rebuild/cash.js"></script>
   <script src="js/layers/rebuild/hardware.js"></script>
+  <script src="js/layers/rebuild/problem.js"></script>
 
-  <script src="js/layers/tick/tickLayer.js"></script>
+  <script src="js/layers/tick/tick.js"></script>
   <script src="js/layers/tick/tickUpgrade.js"></script>
 
   <script src="js/auto.js"></script>
@@ -32,12 +33,12 @@
 </head>
 
 <body onload="startGame()">
-  <div id="tickTab">
-    <h2 id="tickProgress">30 seconds</h2>
+  <div id="tickProgressTab">
+    <h2 id="tickProgress" style="font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;"></h2>
     <h3 id="nextTick">Proceeding to next tick takes <span id="nextTickReq">30 seconds</span></h3>
   </div>
 
-  <div id="tickLayerTab">
+  <div id="tickTab">
     <h3 id="tickDisplay">You are at Tick <span id="currentTick">0</span></span>
     </h3>
     <button id="tickBtn" onclick="resetCheck(1)">Finish this tick and proceed by <span id="tickGain">a</span> Tick<span
@@ -62,7 +63,25 @@
       <label for="CPU">CPU:</label>
       <select name="CPU" id="CPU"></select>
     </div>
+    <div>
+      <label for="MEM">Memory:</label>
+      <select name="MEM" id="MEM"></select>
+    </div>
     <button onclick="resetCheck(3)">Rebuild your machine in the price of abandoning the previous simulation.<span id="firstRebuild"> You will also unlock a (NOT IMPLEMENTED) new feature!</span></button>
+  </div>
+
+  <div id="problemsTab">
+    <br>
+    <h3>Problems</h3>
+    <h4>Discover the ending of the universe in these problems and earn cash in the progress!</h4>
+    <div id="problemStatus">
+      <div>You are currently in problem <span id="currentProblem">0</span>.</div>
+      <button id="quitProblem" onclick="startProblem(0)">Give up on the problem.</button>
+    </div>
+    <h5>Problem 1</h5>
+    <div>A universe made out of expo growth, base countdown is always 1, but each tick takes 2x more time than the previous tick, ends in tick 50, awards 100 cash for every 10 ticks finished, and extra ??? cash for reaching the end.</div>
+    <div id="problem1Stat">Your best tick ever in this problem is Tick 0, awarding you 0 cash.</div>
+    <button onclick="startProblem(1)">Work on this problem.</button>
   </div>
 
   <div id="optionsTab">
@@ -75,10 +94,11 @@
 
   <div id="tabbingTab">
     <br>
+    <button id="tickProgressToggle" onclick="toggleTab('tickProgress')">Tick Progress Display: <span id="tickProgressShown">On</span></button>
     <button id="tickToggle" onclick="toggleTab('tick')">Tick Display: <span id="tickShown">On</span></button>
-    <button id="tickLayerToggle" onclick="toggleTab('tickLayer')">Tick Layer Display: <span id="tickLayerShown">On</span></button>
     <button id="tickUpgradeToggle" onclick="toggleTab('tickUpgrade')">Tick Upgrade Display: <span id="tickUpgradeShown">On</span></button>
     <button id="rebuildToggle" onclick="toggleTab('rebuild')">Rebuild layer Display: <span id="rebuildShown">On</span></button>
+    <button id="problemsToggle" onclick="toggleTab('problems')">Problems Display: <span id="problemsShown">On</span></button>
     <button id="optionsToggle" onclick="toggleTab('options')">Options Display: <span id="optionsShown">On</span></button>
   </div>
 

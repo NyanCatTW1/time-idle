@@ -3,6 +3,7 @@ function updateDisplay() {
   updateToggleDisplay()
   updateTUDisplay()
   updateRebuildLayer()
+  updateProblemDisplay()
   updateTabs()
 }
 
@@ -42,7 +43,7 @@ function updateTickReq() {
     str += `(${nf(getExpoBase())} ^ ${nf(getExpoPower())}) = `
   }
   
-  str += timeDisplay(tickReq())
+  str += `${nf(tickReq())} processor cycles`
 
   ue("nextTickReq", str)
 }
@@ -100,8 +101,23 @@ function toggleMaxedTickUpg() {
   player.hideMaxedTickUpg = !player.hideMaxedTickUpg
 }
 
-function updateRebuildLayer() {
+function updateRebuildLayer(force = true) {
+  if (!showTab("rebuild") && !force) return false
+
   de("firstRebuild", player.rebuilds < 1)
   ue("cashSpent", nf(getPlanCost()))
   ue("cashAvailable", nf(getCashAvailable()))
+}
+
+function updateProblemDisplay(force = true) {
+  if (!showTab("problems") && !force) return false
+
+  de("problemStatus", player.challenge != 0, "", function() {
+    ue("currentProblem", player.challenge)
+    ue("quitProblem", player.tick.gte(problemGoals[player.challenge]) ? "Answer the problem." : "Give up on the problem.")
+  })
+
+  for (let i = 1; i < problemGoals.length; i++) {
+    ue(`problem${i}Stat`, `Your best tick ever in this problem is Tick ${nf(getProblemTickEver(i))}, awarding you ${nf(getProblemReward(i))} cash.`)
+  }
 }
