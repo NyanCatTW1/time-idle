@@ -4,6 +4,11 @@ var problemGoals = [
   new Decimal(100)
 ]
 
+var problemAnswerReward = [
+  null,
+  "Making use of the answer, expo softcap base is reduced down to 1.05!"
+]
+
 function getProblemTickEver(id) {
   if (!player.problemTickEver[id]) return new Decimal(0)
   return player.problemTickEver[id]
@@ -19,8 +24,14 @@ function getProblemReward(id) {
   }
 }
 
+function canAnswerProblem() {
+  if (player.problem === 0) return false
+
+  return player.tick.gte(problemGoals[player.problem])
+}
+
 function startProblem(id) {
-  if (player.challenge == id) return false
+  if (player.problem == id) return false
   reset(3, true, id != 0)
-  player.challenge = id
+  player.problem = id
 }

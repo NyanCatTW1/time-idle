@@ -9,9 +9,9 @@ var getDefaultPlayer = () => ({
   hardware: {},
   problemTickEver: [null],
   problemAnswered: [null],
-  challenge: 0,
+  problem: 0,
   rebuilds: 0,
-  version: 1.5
+  version: 2
 })
 
 var player = getDefaultPlayer()

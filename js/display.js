@@ -23,6 +23,16 @@ function updateTickLayer(force = false) {
   de("tickDisplay", player.tickEver.gt(0), "", function() {
     ue("currentTick", nf(player.tick))
   })
+
+  ue("nextUnlock", getNextTickUnlock())
+}
+
+function getNextTickUnlock() {
+  if (player.tickEver.gt(50)) {
+    if (player.tickEver.lt(100)) return "You will unlock a new prestige layer at tick 100"
+    else return `Your highest tick ever is ${nf(player.tickEver)}`
+  } 
+  return ""
 }
 
 function updateTickProgress() {
@@ -112,12 +122,12 @@ function updateRebuildLayer(force = true) {
 function updateProblemDisplay(force = true) {
   if (!showTab("problems") && !force) return false
 
-  de("problemStatus", player.challenge != 0, "", function() {
-    ue("currentProblem", player.challenge)
-    ue("quitProblem", player.tick.gte(problemGoals[player.challenge]) ? "Answer the problem." : "Give up on the problem.")
+  de("problemStatus", player.problem != 0, "", function() {
+    ue("currentProblem", player.problem)
+    ue("quitProblem", player.tick.gte(problemGoals[player.problem]) ? "Answer the problem." : "Give up on the problem.")
   })
 
   for (let i = 1; i < problemGoals.length; i++) {
-    ue(`problem${i}Stat`, `Your best tick ever in this problem is Tick ${nf(getProblemTickEver(i))}, awarding you ${nf(getProblemReward(i))} cash.`)
+    ue(`problem${i}Stat`, `Your best tick ever in this problem is Tick ${nf(getProblemTickEver(i))}, awarding you ${nf(getProblemReward(i))} cash.${player.problemAnswered[i] ? "<br>" + problemAnswerReward[i] : ""}`, true)
   }
 }

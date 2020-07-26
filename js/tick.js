@@ -8,7 +8,7 @@ function tickReq() {
 function getEffectiveTick() {
   let ret = player.tick
 
-  if (player.challenge != 2) ret = ret.minus(getHardwareEffect("MEM"))
+  if (player.problem != 2) ret = ret.minus(getHardwareEffect("MEM"))
   
   ret = Decimal.max(0, ret)
 
@@ -17,7 +17,7 @@ function getEffectiveTick() {
 
 function getLinearPart(hardcap = true) {
 
-  if (player.challenge == 1) return getHardwareEffect("MOBO").div(5)
+  if (player.problem == 1) return getHardwareEffect("MOBO").div(5)
 
   const tick = getEffectiveTick()
   let ret = new Decimal(30)
@@ -37,7 +37,7 @@ function getLinearPart(hardcap = true) {
 }
 
 function getLinearSoftcapStart() {
-  if (player.challenge == 2) return new Decimal(0)
+  if (player.problem == 2) return new Decimal(0)
   
   return new Decimal(10)
 }
@@ -54,7 +54,8 @@ function getExpoPart() {
 function getExpoBase() {
   let ret = new Decimal(1.1)
 
-  if (player.challenge == 1) ret = new Decimal(2)
+  if (player.problemAnswered[1]) ret = new Decimal(1.05)
+  if (player.problem == 1) ret = new Decimal(2)
 
   return ret
 }
@@ -63,13 +64,13 @@ function getExpoPower() {
   const tick = getEffectiveTick()
   let ret = Decimal.max(0, tick.minus(getExpoSoftcapStart()))
 
-  if (player.challenge == 1) ret = tick
+  if (player.problem == 1) ret = tick
 
   return ret
 }
 
 function getExpoSoftcapStart() {
-  if (player.challenge == 2) return new Decimal(0)
+  if (player.problem == 2) return new Decimal(0)
 
   return new Decimal(50)
 }
@@ -83,7 +84,7 @@ function getLinearSoftcapPower() {
 }
 
 function getLinearSoftcapPowerIncreaseStart() {
-  if (player.challenge == 2) return new Decimal(0)
+  if (player.problem == 2) return new Decimal(0)
 
   return new Decimal(99)
 }

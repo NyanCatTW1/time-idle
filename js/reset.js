@@ -33,6 +33,9 @@ function reset(layer, auto = false, ask = true) {
         updateHardwareSelect()
         player.rebuilds++
       }
+      if (canAnswerProblem()) {
+        player.problemAnswered[player.problem] = true
+      }
       break;
   }
 

@@ -74,6 +74,11 @@ function onLoad() { // Put your savefile updating codes here
     player.tickEver = player.timePointsEver
     delete player.timePointsEver
   }
+
+  if (player.version < 2 && player.challenge) {
+    player.problem = player.challenge
+    delete player.challenge
+  }
 }
 // Only change things above to fit your game UNLESS you know what you're doing
 
