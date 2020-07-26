@@ -9,27 +9,39 @@
   <meta name="description" content="Time Idle" />
   <meta name="author" content="Kryptid and Nyan Cat" />
 
-  <script src="js/libs/break_eternity.min.js"></script>
-  <script src="js/libs/lodash.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const loadList = [
+        "js/libs/break_eternity.min.js",
+        "js/libs/lodash.min.js",
 
-  <script src="js/libs/clipboard.js"></script>
-  <script src="js/libs/dom.js"></script>
-  <script src="js/libs/format.js"></script>
-  <script src="js/libs/saving.js"></script>
+        "js/libs/clipboard.js",
+        "js/libs/dom.js",
+        "js/libs/format.js",
+        "js/libs/saving.js",
 
-  <script src="js/layers/rebuild/cash.js"></script>
-  <script src="js/layers/rebuild/hardware.js"></script>
-  <script src="js/layers/rebuild/problem.js"></script>
+        "js/layers/rebuild/cash.js",
+        "js/layers/rebuild/hardware.js",
+        "js/layers/rebuild/problem.js",
 
-  <script src="js/layers/tick/tick.js"></script>
-  <script src="js/layers/tick/tickUpgrade.js"></script>
+        "js/layers/tick/tick.js",
+        "js/layers/tick/tickUpgrade.js",
 
-  <script src="js/auto.js"></script>
-  <script src="js/display.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/reset.js"></script>
-  <script src="js/tabs.js"></script>
-  <script src="js/tick.js"></script>
+        "js/auto.js",
+        "js/display.js",
+        "js/main.js",
+        "js/reset.js",
+        "js/tabs.js",
+        "js/tick.js"
+      ]
+      const versionUpdate = (new Date()).getTime()
+      for (let file of loadList) {
+        var script = document.createElement("script")
+        script.src = file + "?v=" + versionUpdate
+        document.body.appendChild(script)
+      }
+    });
+  </script>
 </head>
 
 <body onload="startGame()">
@@ -41,8 +53,7 @@
   <div id="tickTab">
     <h3 id="tickDisplay">You are at Tick <span id="currentTick">0</span>. <span id="nextUnlock"></span>
     </h3>
-    <button id="tickBtn" onclick="resetCheck(1)">Finish this tick and proceed by <span id="tickGain">a</span> Tick<span
-        id="tickGainS"></span></h2>
+    <button id="tickBtn" onclick="resetCheck(1)">Finish this tick and proceed by <span id="tickGain">a</span> Tick<span id="tickGainS"></span></h2>
   </div>
 
   <div id="tickUpgradeTab">
