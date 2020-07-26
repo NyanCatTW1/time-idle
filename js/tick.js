@@ -82,7 +82,8 @@ function getLinearSoftcapPower() {
   const tick = getEffectiveTick()
   let ret = new Decimal(10)
   ret = ret.minus(getTULevel(1))
-  ret = ret.times(Decimal.max(0, tick.minus(getLinearSoftcapPowerIncreaseStart())).divide(20).plus(1))
+  ret = ret.minus(getTULevel(4).divide(2.5))
+  ret = ret.times(Decimal.max(0, tick.minus(getLinearSoftcapPowerIncreaseStart())).divide(50).plus(1))
   return ret
 }
 
