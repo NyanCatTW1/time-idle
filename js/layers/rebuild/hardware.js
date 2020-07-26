@@ -13,7 +13,7 @@ var hardwares = {
   MOBO: [
     ["Default", new Decimal(0), new Decimal(5)],
     ["T1", new Decimal(50), new Decimal(3)],
-    ["T2", new Decimal(100), new Decimal(2)]
+    ["T2", new Decimal(100), new Decimal(1)]
   ]
 }
 
