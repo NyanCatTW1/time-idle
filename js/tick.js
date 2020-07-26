@@ -34,6 +34,9 @@ function getLinearPart(hardcap = true) {
   // Linear hardcap
   if (hardcap) ret = Decimal.max(getHardwareEffect("MOBO").div(5), ret)
 
+  // Problem 3
+  if (player.problem == 3) ret = ret.times(8000)
+
   return ret
 }
 

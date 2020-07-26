@@ -1,7 +1,8 @@
 var problemGoals = [
   null,
   new Decimal(25),
-  new Decimal(100)
+  new Decimal(100),
+  new Decimal(0)
 ]
 
 var problemAnswerReward = [
@@ -20,13 +21,17 @@ function getProblemReward(id) {
   switch (id) {
     case 1:
       return new Decimal(50).times(Decimal.min(5, Decimal.floor(tickEver.div(5))))
-    default:
+    case 2:
       return new Decimal(100).times(Decimal.min(10, Decimal.floor(tickEver.div(10))))
+    case 3:
+      return new Decimal(100).times(Decimal.floor(tickEver.div(25)))
+    default:
+      return new Decimal(0)
   }
 }
 
 function canAnswerProblem() {
-  if (player.problem === 0) return false
+  if (player.problem === 0 || problemGoals[player.problem].eq(0)) return false
 
   return player.tick.gte(problemGoals[player.problem])
 }
