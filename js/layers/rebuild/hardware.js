@@ -4,7 +4,8 @@ var hardwares = {
     ["Default", new Decimal(0), new Decimal(1)],
     ["T1", new Decimal(100), new Decimal(2)],
     ["T2", new Decimal(250), new Decimal(20)],
-    ["T3", new Decimal(500), new Decimal(250)]
+    ["T3", new Decimal(500), new Decimal(250)],
+    ["T4", new Decimal(1000), new Decimal(2000)]
   ],
   MEM: [
     ["Default", new Decimal(0), new Decimal(0)],

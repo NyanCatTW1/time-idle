@@ -9,7 +9,8 @@ function getEffectiveTick() {
   let ret = player.tick
 
   if (player.problem != 2) ret = ret.minus(getHardwareEffect("MEM"))
-  
+  if (player.problemAnswered[2]) ret = ret.minus(10)
+
   ret = Decimal.max(0, ret)
 
   return ret

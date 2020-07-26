@@ -6,7 +6,8 @@ var problemGoals = [
 
 var problemAnswerReward = [
   null,
-  "Making use of the answer, expo softcap base is reduced down to 1.05!"
+  "Making use of the answer, expo softcap base is reduced down to 1.05!",
+  "If you optimize RAM space and that and that, all softcaps get delayed by 10 ticks!"
 ]
 
 function getProblemTickEver(id) {
