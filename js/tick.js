@@ -67,6 +67,8 @@ function getExpoPower() {
 
   if (player.problem == 1) ret = tick
 
+  ret = ret.times(Decimal.max(0, player.tick.minus(150).divide(10).plus(1)))
+
   return ret
 }
 
