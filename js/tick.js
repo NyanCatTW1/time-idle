@@ -71,7 +71,7 @@ function getExpoPower() {
 
 
   // Tick 150 softcap
-  ret = ret.times(Decimal.max(0, player.tick.minus(150).divide(50)).plus(1))
+  ret = ret.times(Decimal.max(0, tick.minus(150).divide(50)).plus(1))
 
   return ret
 }
