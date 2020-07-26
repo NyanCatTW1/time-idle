@@ -63,7 +63,7 @@ function getExpoPower() {
   const tick = getEffectiveTick()
   let ret = Decimal.max(0, tick.minus(getExpoSoftcapStart()))
 
-  if (player.challenge == 1) ret = player.tick
+  if (player.challenge == 1) ret = tick
 
   return ret
 }
