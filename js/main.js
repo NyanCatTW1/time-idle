@@ -8,6 +8,7 @@ var getDefaultPlayer = () => ({
   hideMaxedTickUpg: true,
   hardware: {},
   problemTickEver: [null],
+  problemAnswered: [null],
   challenge: 0,
   rebuilds: 0,
   version: 1.5

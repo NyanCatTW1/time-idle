@@ -1,18 +1,21 @@
 function resetCheck(layer) {
-  let checkPass = false
-  switch (layer) {
-    case 1:
-      checkPass = canTick()
-      break;
-    case 3:
-      checkPass = getCashAvailable().gte(getPlanCost())
-  }
-  if (checkPass) reset(layer)
+  if (canReset(layer)) reset(layer)
 }
 
-function reset(layer, auto = false) {
+function canReset(layer) {
+  switch (layer) {
+    default:
+      return true
+    case 1:
+      return canTick()
+    case 3:
+      return getCashAvailable().gte(getPlanCost())
+  }
+}
+
+function reset(layer, auto = false, ask = true) {
   // Confirmations
-  if (!auto) {
+  if (ask) {
     switch (layer) {
       case 3:
         if (!confirm("This will reset all your tick upgrades and put you back to tick 0, are you sure about that?")) return false
@@ -25,9 +28,11 @@ function reset(layer, auto = false) {
       awardTick(tickGain())
       break;
     case 3:
-      applyPlannedHardware()
-      updateHardwareSelect()
-      player.rebuilds++
+      if (canReset(3) && !auto) {
+        applyPlannedHardware()
+        updateHardwareSelect()
+        player.rebuilds++
+      }
       break;
   }
 

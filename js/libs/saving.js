@@ -11,7 +11,8 @@ const decimalLibraryVarName = "Decimal" // MAKE SURE YOU CHANGE THIS IF YOU ARE 
 const arrayTypes = {
   // For EACH array in your player variable, put a key/value to define its type like I did below
   hiddenTabs: "String",
-  problemTickEver: "Decimal"
+  problemTickEver: "Decimal",
+  problemAnswered: "Decimal"
 }
 
 // Ex: When you have object that looks like {1: new Decimal(2), 2: new Decimal(1)}, it belongs here
