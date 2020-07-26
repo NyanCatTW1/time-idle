@@ -27,7 +27,7 @@ var hardwares = {
     new Hardware("Default", 0, 5),
     new Hardware("T1", 50, 3),
     new Hardware("T2", 100, 1),
-    new Hardware("T3", 250, 0.5)
+    new Hardware("T3", 250, 1/4)
   ]
 }
 
