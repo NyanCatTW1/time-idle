@@ -7,7 +7,8 @@ var hardwares = {
   ],
   MEM: [
     ["Default", new Decimal(0), new Decimal(0)],
-    ["T1", new Decimal(200), new Decimal(5)]
+    ["T1", new Decimal(200), new Decimal(5)],
+    ["T2", new Decimal(400), new Decimal(10)]
   ],
   MOBO: [
     ["Default", new Decimal(0), new Decimal(5)],
