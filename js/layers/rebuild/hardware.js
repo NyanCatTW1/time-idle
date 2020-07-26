@@ -21,7 +21,8 @@ var hardwares = {
     new Hardware("Default", 0, 0),
     new Hardware("T1", 200, 5),
     new Hardware("T2", 400, 10),
-    new Hardware("T3", 800, 15)
+    new Hardware("T3", 800, 15),
+    new Hardware("T4", 1600, 20)
   ],
   MOBO: [
     new Hardware("Default", 0, 5),
