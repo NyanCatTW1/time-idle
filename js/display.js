@@ -35,8 +35,8 @@ function updateTickReq() {
   let str = ""
 
   if (getExpoPart().neq(1)) {
-    if (linearPart.lt(1)) {
-      str += `Max(1, ${nf(linearPart)}) * `
+    if (linearPart.lt(getHardwareEffect("MOBO").div(5))) {
+      str += `Max(${nf(getHardwareEffect("MOBO").div(5))}, ${nf(linearPart)}) * `
     } else {
       str += `${nf(linearPart)} * `
     }

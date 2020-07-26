@@ -31,7 +31,7 @@ function getLinearPart(hardcap = true) {
   ret = ret.plus(Decimal.max(0, tick.minus(getLinearSoftcapStart())).times(getLinearSoftcapPower()))
 
   // Linear hardcap
-  if (hardcap) ret = Decimal.max(1, ret)
+  if (hardcap) ret = Decimal.max(getHardwareEffect("MOBO").div(5), ret)
 
   return ret
 }

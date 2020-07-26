@@ -3,7 +3,8 @@ var hardwares = {
     // Name, Cost, Power
     ["Default", new Decimal(0), new Decimal(1)],
     ["T1", new Decimal(100), new Decimal(2)],
-    ["T2", new Decimal(250), new Decimal(20)]
+    ["T2", new Decimal(250), new Decimal(20)],
+    ["T3", new Decimal(500), new Decimal(250)]
   ],
   MEM: [
     ["Default", new Decimal(0), new Decimal(0)],
@@ -13,7 +14,7 @@ var hardwares = {
   MOBO: [
     ["Default", new Decimal(0), new Decimal(5)],
     ["T1", new Decimal(50), new Decimal(3)],
-    ["T2", new Decimal(100), new Decimal(1)]
+    ["T2", new Decimal(200), new Decimal(1)]
   ]
 }
 
@@ -73,6 +74,6 @@ function getHardwareEffectText(type, value) {
       return `Delay all softcaps by ${nf(value)} ticks`
     case "MOBO":
       if (value.gte(5)) return "It just works"
-      return `Auto tick after ${nf(value)} cycle${value.gt(1) ? "s" : ""}, without upgrade 2`
+      return `Auto tick after ${nf(value)} cycle${value.gt(1) ? "s" : ""} without upgrade 2, and reduce linear hardcap to ${nf(value.div(5))}`
   }
 }
