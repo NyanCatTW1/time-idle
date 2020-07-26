@@ -46,7 +46,6 @@ function getLinearSoftcapStart() {
 function getExpoPart() {
   let ret = new Decimal(1)
 
-  // Apply expo softcap
   ret = Decimal.pow(getExpoBase(), getExpoPower())
 
   return ret
@@ -65,15 +64,13 @@ function getExpoPower() {
   const tick = getEffectiveTick()
   let ret = Decimal.max(0, tick.minus(getExpoSoftcapStart()))
 
-  if (player.problem == 1) ret = tick
-
-  ret = ret.times(Decimal.max(0, player.tick.minus(150).divide(10).plus(1)))
+  ret = ret.times(Decimal.max(0, player.tick.minus(150).divide(10)).plus(1))
 
   return ret
 }
 
 function getExpoSoftcapStart() {
-  if (player.problem == 2) return new Decimal(0)
+  if (player.problem <= 2) return new Decimal(0)
 
   return new Decimal(50)
 }

@@ -1,23 +1,33 @@
+class Hardware {
+  constructor (name, cost, effect) {
+    if (!(this instanceof Hardware)) throw new Error("Constructor called as a function");
+
+    this.Name = name
+    this.Cost = new Decimal(cost)
+    this.Effect = new Decimal(effect)
+  }
+}
+
 var hardwares = {
   CPU: [
-    // Name, Cost, Power
-    ["Default", new Decimal(0), new Decimal(1)],
-    ["T1", new Decimal(100), new Decimal(2)],
-    ["T2", new Decimal(250), new Decimal(20)],
-    ["T3", new Decimal(500), new Decimal(250)],
-    ["T4", new Decimal(1000), new Decimal(2000)]
+    // Name, Cost, Effect
+    new Hardware("Default", 0, 1),
+    new Hardware("T1", 100, 2),
+    new Hardware("T2", 250, 20),
+    new Hardware("T3", 500, 250),
+    new Hardware("T4", 1000, 2000)
   ],
   MEM: [
-    ["Default", new Decimal(0), new Decimal(0)],
-    ["T1", new Decimal(200), new Decimal(5)],
-    ["T2", new Decimal(400), new Decimal(10)],
-    ["T3", new Decimal(800), new Decimal(15)]
+    new Hardware("Default", 0, 0),
+    new Hardware("T1", 200, 5),
+    new Hardware("T2", 400, 10),
+    new Hardware("T3", 800, 15)
   ],
   MOBO: [
-    ["Default", new Decimal(0), new Decimal(5)],
-    ["T1", new Decimal(50), new Decimal(3)],
-    ["T2", new Decimal(100), new Decimal(1)],
-    ["T3", new Decimal(250), new Decimal(0.5)]
+    new Hardware("Default", 0, 5),
+    new Hardware("T1", 50, 3),
+    new Hardware("T2", 100, 1),
+    new Hardware("T3", 250, 0.5)
   ]
 }
 
@@ -34,7 +44,7 @@ function getPlanHardwareTier(name) {
 function getPlanCost() {
   let ret = new Decimal(0)
   for (let hardware of Object.keys(hardwares)) {
-    ret = ret.plus(hardwares[hardware][getPlanHardwareTier(hardware)][1])
+    ret = ret.plus(hardwares[hardware][getPlanHardwareTier(hardware)].Cost)
   }
   return ret
 }
@@ -51,7 +61,7 @@ function updateHardwareSelect() {
       const desc = tiers[tier]
       const optionElm = document.createElement('option')
       if (currentTier == tier) optionElm.selected = "selected"
-      optionElm.text = `${desc[0]}${currentTier == tier ? " (CURRENT)" : ""}, $${nf(desc[1])}, ${getHardwareEffectText(hardware, desc[2])}`
+      optionElm.text = `${desc.Name}${currentTier == tier ? " (CURRENT)" : ""}, $${nf(desc.Cost)}, ${getHardwareEffectText(hardware, desc.Effect)}`
       optionElm.value = tier
       selectElm.add(optionElm)
     }
@@ -66,7 +76,7 @@ function applyPlannedHardware() {
 
 function getHardwareEffect(type) {
   const tier = getHardwareTier(type)
-  return hardwares[type][tier][2]
+  return hardwares[type][tier].Effect
 }
 
 function getHardwareEffectText(type, value) {

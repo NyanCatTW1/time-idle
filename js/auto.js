@@ -8,7 +8,7 @@ function autoTickUnlocked() {
 
 function runAuto() {
   if (autoTickUnlocked() && player.tickTimeSpent.minus(tickReq()).gte(getAutoTickSlowdown())) reset(1)
-  if (getHardwareTier("MEM") >= 3) {
+  if (getHardwareTier("MOBO") >= 3) {
     for (let i = 0; i < tickUpgrades.length; i++) {
       buyTickUpgrade(i)
     }
