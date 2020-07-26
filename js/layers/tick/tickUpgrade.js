@@ -1,9 +1,9 @@
 var tickUpgrades = [
   // Desc, Base cost, Cost scale, Max level, Unlock at
-  ["Decrease base tick time by 5 seconds per level", new Decimal(0.5), new Decimal(2), new Decimal(5), new Decimal(1)],
-  ["Finish the tick automatically 5 cycles after 100%, and nerf linear softcap by a second", new Decimal(15), new Decimal(1), new Decimal(1), new Decimal(10)],
-  ["Decrease base tick time by 2 second per time point per level", new Decimal(25), new Decimal(1.2), new Decimal(4), new Decimal(20)],
-  ["Decrease base tick time by another 5 seconds per level", new Decimal(90), new Decimal(1.05), new Decimal(2), new Decimal(90)]
+  ["Decrease base tick time by 5 cycles per level", new Decimal(0.5), new Decimal(2), new Decimal(5), new Decimal(1)],
+  ["Finish the tick automatically 5 cycles after 100%, and nerf linear softcap by a cycle", new Decimal(15), new Decimal(1), new Decimal(1), new Decimal(10)],
+  ["Decrease base tick time by 2 cycles per time point per level", new Decimal(25), new Decimal(1.2), new Decimal(4), new Decimal(20)],
+  ["Decrease base tick time by another 5 cycles per level", new Decimal(90), new Decimal(1.05), new Decimal(2), new Decimal(90)]
 ]
 
 function getTULevel(id) {
