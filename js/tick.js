@@ -17,7 +17,7 @@ function getEffectiveTick() {
 
 function getLinearPart(hardcap = true) {
 
-  if (player.challenge == 1) return new Decimal(1)
+  if (player.challenge == 1) return getHardwareEffect("MOBO").div(5)
 
   const tick = getEffectiveTick()
   let ret = new Decimal(30)
