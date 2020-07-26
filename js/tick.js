@@ -28,7 +28,7 @@ function getLinearPart(hardcap = true) {
   ret = ret.minus(player.tick.times(getTULevel(2).times(2)))
   ret = ret.minus(getTULevel(3).times(5))
 
-  // Apply linear softcap
+  // Tick 10 softcap
   ret = ret.plus(Decimal.max(0, tick.minus(getLinearSoftcapStart())).times(getLinearSoftcapPower()))
 
   // Linear hardcap
@@ -65,6 +65,8 @@ function getExpoBase() {
 
 function getExpoPower() {
   const tick = getEffectiveTick()
+
+  // Tick 50 softcap
   let ret = Decimal.max(0, tick.minus(getExpoSoftcapStart()))
 
 
