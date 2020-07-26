@@ -73,7 +73,7 @@ function getExpoPower() {
 }
 
 function getExpoSoftcapStart() {
-  if (player.problem <= 2) return new Decimal(0)
+  if (player.problem == 1 || player.problem == 2) return new Decimal(0)
 
   return new Decimal(50)
 }
