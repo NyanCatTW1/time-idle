@@ -67,7 +67,9 @@ function getExpoPower() {
   const tick = getEffectiveTick()
   let ret = Decimal.max(0, tick.minus(getExpoSoftcapStart()))
 
-  ret = ret.times(Decimal.max(0, player.tick.minus(150).divide(10)).plus(1))
+
+  // Tick 150 softcap
+  ret = ret.times(Decimal.max(0, player.tick.minus(150).divide(50)).plus(1))
 
   return ret
 }
@@ -81,9 +83,14 @@ function getExpoSoftcapStart() {
 function getLinearSoftcapPower() {
   const tick = getEffectiveTick()
   let ret = new Decimal(10)
+
+  // Apply TU
   ret = ret.minus(getTULevel(1))
   ret = ret.minus(getTULevel(4).divide(2.5))
-  ret = ret.times(Decimal.max(0, tick.minus(getLinearSoftcapPowerIncreaseStart())).divide(50).plus(1))
+
+  // Tick 100 softcap
+  ret = ret.times(Decimal.max(0, tick.minus(getLinearSoftcapPowerIncreaseStart())).divide(20).plus(1))
+
   return ret
 }
 
