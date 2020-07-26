@@ -72,6 +72,6 @@ function getHardwareEffectText(type, value) {
       return `Delay all softcaps by ${nf(value)} ticks`
     case "MOBO":
       if (value.gte(5)) return "It just works"
-      return `Auto tick every ${nf(value)} seconds, without upgrade 2`
+      return `Auto tick after ${nf(value)} cycles, without upgrade 2`
   }
 }
