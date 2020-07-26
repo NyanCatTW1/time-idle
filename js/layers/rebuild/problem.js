@@ -1,6 +1,7 @@
 var problemGoals = [
   null,
-  new Decimal(50)
+  new Decimal(50),
+  new Decimal(100)
 ]
 
 function getProblemTickEver(id) {
@@ -13,6 +14,8 @@ function getProblemReward(id) {
   switch (id) {
     case 1:
       return new Decimal(100).times(Decimal.min(5, Decimal.floor(tickEver.div(10))))
+    default:
+      return new Decimal(100).times(Decimal.min(10, Decimal.floor(tickEver.div(10))))
   }
 }
 

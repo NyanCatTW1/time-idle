@@ -67,6 +67,10 @@
       <label for="MEM">Memory:</label>
       <select name="MEM" id="MEM"></select>
     </div>
+    <div>
+      <label for="MOBO">Motherboard:</label>
+      <select name="MOBO" id="MOBO"></select>
+    </div>
     <button onclick="resetCheck(3)">Rebuild your machine in the price of abandoning the previous simulation.<span id="firstRebuild"> You will also unlock a (NOT IMPLEMENTED) new feature!</span></button>
   </div>
 
@@ -78,10 +82,16 @@
       <div>You are currently in problem <span id="currentProblem">0</span>.</div>
       <button id="quitProblem" onclick="startProblem(0)">Give up on the problem.</button>
     </div>
+
     <h5>Problem 1</h5>
-    <div>A universe made out of expo growth, base countdown is always 1, but each tick takes 2x more time than the previous tick, ends in tick 50, awards 100 cash for every 10 ticks finished, and extra ??? cash for reaching the end.</div>
+    <div>A universe made out of expo growth, in order to find a better way to handle them. Base countdown is always 1, but each tick takes 2x more time than the previous tick, ends in tick 50, awards 100 cash for every 10 ticks finished, and a unique reward for reaching the end.</div>
     <div id="problem1Stat">Your best tick ever in this problem is Tick 0, awarding you 0 cash.</div>
     <button onclick="startProblem(1)">Work on this problem.</button>
+
+    <h5>Problem 2</h5>
+    <div>A universe designed to understand all the "softcaps" better. Memory is useless, All softcaps begin immediately, ends in tick 100, awards 100 cash for every 10 ticks finished, and a unique reward for reaching the end.</div>
+    <div id="problem2Stat">Your best tick ever in this problem is Tick 0, awarding you 0 cash.</div>
+    <button onclick="startProblem(2)">Work on this problem.</button>
   </div>
 
   <div id="optionsTab">

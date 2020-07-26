@@ -2,11 +2,17 @@ var hardwares = {
   CPU: [
     // Name, Cost, Power
     ["Default", new Decimal(0), new Decimal(1)],
-    ["T1", new Decimal(100), new Decimal(2)]
+    ["T1", new Decimal(100), new Decimal(2)],
+    ["T2", new Decimal(250), new Decimal(20)]
   ],
   MEM: [
     ["Default", new Decimal(0), new Decimal(0)],
     ["T1", new Decimal(200), new Decimal(5)]
+  ],
+  MOBO: [
+    ["Default", new Decimal(0), new Decimal(5)],
+    ["T1", new Decimal(50), new Decimal(3)],
+    ["T2", new Decimal(100), new Decimal(2)]
   ]
 }
 
@@ -64,5 +70,8 @@ function getHardwareEffectText(type, value) {
       return `${nf(value)} cycle/s`
     case "MEM":
       return `Delay all softcaps by ${nf(value)} ticks`
+    case "MOBO":
+      if (value.gte(5)) return "It just works"
+      return `Auto tick every ${nf(value)} seconds, without upgrade 2`
   }
 }
