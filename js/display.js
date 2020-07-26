@@ -124,7 +124,7 @@ function updateProblemDisplay(force = true) {
 
   de("problemStatus", player.problem != 0, "", function() {
     ue("currentProblem", player.problem)
-    ue("quitProblem", player.tick.gte(problemGoals[player.problem]) ? "Answer the problem." : "Give up on the problem.")
+    ue("quitProblem", canAnswerProblem() ? "Answer the problem." : "Give up on the problem.")
   })
 
   for (let i = 1; i < problemGoals.length; i++) {
